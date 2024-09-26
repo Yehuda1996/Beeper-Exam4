@@ -43,10 +43,10 @@ export const getBeeperByStatus = (beeperStatus) => __awaiter(void 0, void 0, voi
 });
 export const deleteBeeper = (beeperId) => __awaiter(void 0, void 0, void 0, function* () {
     const beepers = yield readFromJsonFile();
-    const beeper = beepers.find(b => b.id !== beeperId);
+    const beeper = beepers.find(b => b.id === beeperId);
     if (!beeper) {
         throw new Error(`Beeper by id ${beeperId} not found.`);
     }
-    beepers.filter(b => b.id !== beeperId);
-    yield writeBeeperToJsonFile(beepers);
+    const deletedBeeper = beepers.filter(b => b.id !== beeperId);
+    yield writeBeeperToJsonFile(deletedBeeper);
 });

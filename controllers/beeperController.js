@@ -24,7 +24,7 @@ export const getBeeperWithId = (req, res) => __awaiter(void 0, void 0, void 0, f
             res.status(404).json({ error: "Id is required" });
         }
         const beeper = yield getBeeperById(beeperId);
-        res.status(200).json({ BeeperId: beeperId });
+        res.status(200).json({ BeeperId: beeper });
     }
     catch (error) {
         res.status(500).json({ message: error });
@@ -50,7 +50,7 @@ export const deleteBeeperById = (req, res) => __awaiter(void 0, void 0, void 0, 
             res.status(404).json({ error: "Id is required" });
         }
         const beeper = yield deleteBeeper(beeperId);
-        res.status(200).json({ BeeperId: beeperId, "The beeper has been deleted": beeper });
+        res.status(200).json({ "The beeper has been deleted": beeper });
     }
     catch (error) {
         res.status(500).json({ message: error });

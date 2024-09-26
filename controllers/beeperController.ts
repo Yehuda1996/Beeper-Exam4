@@ -19,7 +19,7 @@ export const getBeeperWithId = async (req: Request, res: Response) => {
             res.status(404).json({error: "Id is required"});
         }
         const beeper = await getBeeperById(beeperId);
-        res.status(200).json({BeeperId: beeperId});
+        res.status(200).json({BeeperId: beeper});
     }
     catch(error){
         res.status(500).json({message: error});
@@ -33,7 +33,7 @@ export const getBeeperWithStatus = async (req: Request, res: Response) => {
             res.status(404).json({error: "Status is required"});
         }
         const beeper = await getBeeperByStatus(beeperStatus);
-        res.status(200).json({BeeperStatus: beeperStatus});
+        res.status(200).json({BeeperStatus: beeper});
     }
     catch(error){
         res.status(500).json({message: error});
@@ -47,7 +47,7 @@ export const deleteBeeperById = async (req: Request, res: Response) => {
             res.status(404).json({error: "Id is required"});
         }
         const beeper = await deleteBeeper(beeperId);
-        res.status(200).json({BeeperId: beeperId, "The beeper has been deleted": beeper} );
+        res.status(200).json({"The beeper has been deleted": beeper} );
     }
     catch(error){
         res.status(500).json({message: error});

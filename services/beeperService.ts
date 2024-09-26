@@ -41,10 +41,10 @@ export const getBeeperByStatus = async (beeperStatus: string): Promise<Beeper> =
 
 export const deleteBeeper = async (beeperId: string) => {
     const beepers: Beeper[] = await readFromJsonFile();
-    const beeper = beepers.find(b => b.id !== beeperId);
+    const beeper = beepers.find(b => b.id === beeperId);
     if(!beeper){
         throw new Error(`Beeper by id ${beeperId} not found.`);
     }
-    beepers.filter(b => b.id !== beeperId);
-    await writeBeeperToJsonFile(beepers);
+    const deletedBeeper = beepers.filter(b => b.id !== beeperId);
+    await writeBeeperToJsonFile(deletedBeeper);
 }
