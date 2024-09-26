@@ -1,6 +1,6 @@
 export var Status;
 (function (Status) {
-    Status["manufatured"] = "manufatured";
+    Status["manufatured"] = "manufactured";
     Status["assembled"] = "assembled";
     Status["shipped"] = "shipped";
     Status["deployed"] = "deployed";

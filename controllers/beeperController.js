@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { getBeepers, getBeeperById, getBeeperByStatus, deleteBeeper } from '../services/beeperService.js';
+import { getBeepers, getBeeperById, getBeeperByStatus, deleteBeeper, createBeeper } from '../services/beeperService.js';
 export const getALLBeepers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const beepers = yield getBeepers();
@@ -37,7 +37,7 @@ export const getBeeperWithStatus = (req, res) => __awaiter(void 0, void 0, void 
             res.status(404).json({ error: "Status is required" });
         }
         const beeper = yield getBeeperByStatus(beeperStatus);
-        res.status(200).json({ BeeperStatus: beeperStatus });
+        res.status(200).json({ BeeperStatus: beeper });
     }
     catch (error) {
         res.status(500).json({ message: error });
@@ -51,6 +51,19 @@ export const deleteBeeperById = (req, res) => __awaiter(void 0, void 0, void 0, 
         }
         const beeper = yield deleteBeeper(beeperId);
         res.status(200).json({ "The beeper has been deleted": beeper });
+    }
+    catch (error) {
+        res.status(500).json({ message: error });
+    }
+});
+export const creatingBeeper = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { name } = req.body;
+        if (!name) {
+            res.status(400).json({ error: "Name is required" });
+        }
+        const newBeeper = yield createBeeper(name);
+        res.status(201).json({ NewBeeper: newBeeper });
     }
     catch (error) {
         res.status(500).json({ message: error });

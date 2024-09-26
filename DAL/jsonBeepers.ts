@@ -1,5 +1,5 @@
 import jsonfile from 'jsonfile';
-import { Beeper } from '../models/types';
+import { Beeper, Status } from '../models/types.js';
 
 const DB_FILE_PATH = process.env.DB_FILE_PATH || './data/db.json';
 
