@@ -1,1 +1,19 @@
-[]
+[{
+    "id": "1",
+    "name": "beeper_1",
+    "status": "manufactured",
+    "created_at": "12:30",
+    "detonated_at": "00:00",
+    "longitude": 35.78674,
+    "latitude": 34.59708
+},
+{
+    "id": "2",
+    "name": "beeper_2",
+    "status": "manufactured",
+    "created_at": "13:30",
+    "detonated_at": "00:00",
+    "longitude": 36.78674,
+    "latitude": 32.59708
+}
+]
