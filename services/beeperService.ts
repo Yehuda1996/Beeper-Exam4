@@ -85,14 +85,11 @@ export const updateBeeperStatus = async (beeperId: string, lat?: number, lon?: n
                 throw new Error("Coordinates are outside of Lebanon")
             }
             break;
-        case Status.deployed:
-            break;
-        case Status.detonated:
-            break;
         default:
             throw new Error("Invalid beeper status");
     }
     await writeBeeperToJsonFile(beepers);
+    return beeper;
 }
 
 

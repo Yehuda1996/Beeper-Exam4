@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
+import { raw, Request, Response } from "express";
 import { Beeper, Status } from "../models/types.js";
-import { getBeepers, getBeeperById, getBeeperByStatus, deleteBeeper, createBeeper } from '../services/beeperService.js';
+import { getBeepers, getBeeperById, getBeeperByStatus, deleteBeeper, createBeeper, updateBeeperStatus } from '../services/beeperService.js';
 
 export const getALLBeepers = async (req: Request, res: Response) => {
     try{
@@ -62,6 +62,22 @@ export const creatingBeeper = async (req: Request, res: Response) => {
         }
         const newBeeper = await createBeeper(name);
         res.status(201).json({NewBeeper: newBeeper});
+    }
+    catch(error){
+        res.status(500).json({message: error});
+    }
+}
+
+export const updateBeeper = async (req: Request, res: Response) => {
+    try{
+        const beeperId = req.params.id;
+        const {lat, lon} = req.body;
+        if(!beeperId){
+            res.status(404).json({error: "Id is required"});
+        }
+        const beeper = await getBeeperById(beeperId)
+        const updatedBeeper =  await updateBeeperStatus(beeperId, lat, lon);
+        res.status(200).json({UpdatedBeeper: updatedBeeper});
     }
     catch(error){
         res.status(500).json({message: error});

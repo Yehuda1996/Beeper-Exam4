@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { getBeepers, getBeeperById, getBeeperByStatus, deleteBeeper, createBeeper } from '../services/beeperService.js';
+import { getBeepers, getBeeperById, getBeeperByStatus, deleteBeeper, createBeeper, updateBeeperStatus } from '../services/beeperService.js';
 export const getALLBeepers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const beepers = yield getBeepers();
@@ -64,6 +64,21 @@ export const creatingBeeper = (req, res) => __awaiter(void 0, void 0, void 0, fu
         }
         const newBeeper = yield createBeeper(name);
         res.status(201).json({ NewBeeper: newBeeper });
+    }
+    catch (error) {
+        res.status(500).json({ message: error });
+    }
+});
+export const updateBeeper = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const beeperId = req.params.id;
+        const { lat, lon } = req.body;
+        if (!beeperId) {
+            res.status(404).json({ error: "Id is required" });
+        }
+        const beeper = yield getBeeperById(beeperId);
+        const updatedBeeper = yield updateBeeperStatus(beeperId, lat, lon);
+        res.status(200).json({ UpdatedBeeper: updatedBeeper });
     }
     catch (error) {
         res.status(500).json({ message: error });
